@@ -1,0 +1,73 @@
+#! /usr/local/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/local/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x7fc534805560 .scope module, "adder_subtractor_tb" "adder_subtractor_tb" 2 13;
+ .timescale 0 0;
+v0x7fc53481d2b0_0 .var "a", 0 0;
+v0x7fc53481d340_0 .var "b", 0 0;
+v0x7fc53481d3d0_0 .var "c", 0 0;
+v0x7fc53481d4a0_0 .var/i "i", 31 0;
+v0x7fc53481d530_0 .net "out", 0 0, L_0x7fc53481dab0;  1 drivers
+S_0x7fc534807870 .scope module, "x" "adder_subtractor" 2 17, 2 1 0, S_0x7fc534805560;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 1 "out";
+    .port_info 1 /INPUT 1 "a";
+    .port_info 2 /INPUT 1 "b";
+    .port_info 3 /INPUT 1 "c";
+L_0x7fc53481d600 .functor NOT 1, v0x7fc53481d340_0, C4<0>, C4<0>, C4<0>;
+L_0x7fc53481d6d0 .functor AND 1, v0x7fc53481d2b0_0, L_0x7fc53481d600, C4<1>, C4<1>;
+L_0x7fc53481d7e0 .functor NOT 1, v0x7fc53481d2b0_0, C4<0>, C4<0>, C4<0>;
+L_0x7fc53481d850 .functor AND 1, L_0x7fc53481d7e0, v0x7fc53481d340_0, C4<1>, C4<1>;
+L_0x7fc53481d920 .functor NOT 1, v0x7fc53481d3d0_0, C4<0>, C4<0>, C4<0>;
+o0x7fc538040188 .functor BUFZ 1, C4<z>; HiZ drive
+L_0x7fc53481da00 .functor AND 1, L_0x7fc53481d920, o0x7fc538040188, C4<1>, C4<1>;
+L_0x7fc53481dab0 .functor OR 1, L_0x7fc53481d6d0, L_0x7fc53481d850, L_0x7fc53481da00, C4<0>;
+v0x7fc53480ac00_0 .net "a", 0 0, v0x7fc53481d2b0_0;  1 drivers
+v0x7fc53481cb60_0 .net "b", 0 0, v0x7fc53481d340_0;  1 drivers
+v0x7fc53481cc00_0 .net "c", 0 0, v0x7fc53481d3d0_0;  1 drivers
+v0x7fc53481ccb0_0 .net "out", 0 0, L_0x7fc53481dab0;  alias, 1 drivers
+v0x7fc53481cd50_0 .net "w1", 0 0, L_0x7fc53481d6d0;  1 drivers
+v0x7fc53481ce30_0 .net "w2", 0 0, L_0x7fc53481d600;  1 drivers
+v0x7fc53481ced0_0 .net "w3", 0 0, L_0x7fc53481d7e0;  1 drivers
+v0x7fc53481cf70_0 .net "w4", 0 0, L_0x7fc53481d850;  1 drivers
+v0x7fc53481d010_0 .net "w6", 0 0, o0x7fc538040188;  0 drivers
+v0x7fc53481d120_0 .net "w7", 0 0, L_0x7fc53481d920;  1 drivers
+v0x7fc53481d1b0_0 .net "w8", 0 0, L_0x7fc53481da00;  1 drivers
+    .scope S_0x7fc534805560;
+T_0 ;
+    %vpi_call 2 21 "$monitor", "Time=%t c=%b a=%b b=%b output=%b", $time, v0x7fc53481d3d0_0, v0x7fc53481d2b0_0, v0x7fc53481d340_0, v0x7fc53481d530_0 {0 0 0};
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x7fc53481d4a0_0, 0, 32;
+T_0.0 ;
+    %load/vec4 v0x7fc53481d4a0_0;
+    %cmpi/s 8, 0, 32;
+    %jmp/0xz T_0.1, 5;
+    %load/vec4 v0x7fc53481d4a0_0;
+    %pad/s 3;
+    %split/vec4 1;
+    %store/vec4 v0x7fc53481d340_0, 0, 1;
+    %split/vec4 1;
+    %store/vec4 v0x7fc53481d2b0_0, 0, 1;
+    %store/vec4 v0x7fc53481d3d0_0, 0, 1;
+    %delay 100, 0;
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x7fc53481d4a0_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %store/vec4 v0x7fc53481d4a0_0, 0, 32;
+    %jmp T_0.0;
+T_0.1 ;
+    %vpi_call 2 29 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "adder_subtractor_tb.v";
